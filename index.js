@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 // Require the necessary discord.js classes, grabs the token from config
-const { Client, Collection, Events, GatewayIntentBits, TextInputStyle } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, TextInputStyle, ButtonBuilder } = require('discord.js');
 const { token } = require('./config.json');
 
 // Creates a new instance of the client 
@@ -26,13 +26,494 @@ client.once(Events.ClientReady, () => {
 	console.log('Ready!');
 });
 
+
+
+var s1 =  "N";
+var s2 =  "N";
+var s3 =  "N";
+var s4 =  "N";
+var s5 =  "N";
+var s6 =  "N";
+var s7 =  "N";
+var s8 =  "N";
+var s9 =  "N";
+var board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+var played = true;
+var tictactoebot = 1;
+
+//Why would I try coding tic tac toe without array
 client.on(Events.InteractionCreate, async interaction => {
-	var selector = Math.floor( Math.random() * 3 ) + 1;
-	if (interaction.customId == "primary") {
+	//Tic Tac Toe Logic
+	if (interaction.customId === "row1-col1") {
+		if (s1 === "N") {
+			s1 = "X";
+			played = true;
+		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
+			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+			interaction.reply(board + '\nYou win!')
+		}
+			while (played) {
+				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
+				if (tictactoebot === 1 && s1 === "N") {
+					s1 = "O";
+					played = false;
+				} else if (tictactoebot === 2 && s2 === "N") {
+					played = false;
+					s2 = "O";
+				} else if (tictactoebot === 3 && s3 === "N") {
+					played = false;
+					s3 = "O";
+				} else if (tictactoebot === 4 && s4 === "N") {
+					played = false;
+					s4 = "O";
+				} else if (tictactoebot === 5 && s5 === "N") {
+					played = false;
+					s5 = "O";
+				} else if (tictactoebot === 6 && s6 === "N") {
+					played = false;
+					s6 = "O";
+				} else if (tictactoebot === 7 && s7 === "N") {
+					played = false;
+					s7 = "O";
+				} else if (tictactoebot === 8 && s8 === "N") {
+					played = false;
+					s8 = "O";
+				} else if (tictactoebot === 9 && s9 === "N") {
+					played = false;
+					s9 = "O";
+				}
+				
+				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + '\nThe bot beat you!')
+				} else if (played === false) {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + '\nThe bot played in slot ' +tictactoebot+ '!')
+				}
+			}
+		} else {
+			interaction.reply('That slot has already been played in! Choose a new one!')
+		}
+	}
+	if (interaction.customId === "row1-col2") {
+		if (s2 === "N") {
+			s2 = "X";
+			played = true;
+		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
+			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+			interaction.reply(board + '\nYou win!')
+		}
+			while (played) {
+				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
+				if (tictactoebot === 1 && s1 === "N") {
+					s1 = "O";
+					played = false;
+				} else if (tictactoebot === 2 && s2 === "N") {
+					played = false;
+					s2 = "O";
+				} else if (tictactoebot === 3 && s3 === "N") {
+					played = false;
+					s3 = "O";
+				} else if (tictactoebot === 4 && s4 === "N") {
+					played = false;
+					s4 = "O";
+				} else if (tictactoebot === 5 && s5 === "N") {
+					played = false;
+					s5 = "O";
+				} else if (tictactoebot === 6 && s6 === "N") {
+					played = false;
+					s6 = "O";
+				} else if (tictactoebot === 7 && s7 === "N") {
+					played = false;
+					s7 = "O";
+				} else if (tictactoebot === 8 && s8 === "N") {
+					played = false;
+					s8 = "O";
+				} else if (tictactoebot === 9 && s9 === "N") {
+					played = false;
+					s9 = "O";
+				}
+				
+				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + '\nThe bot beat you!')
+				} else if (played === false) {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+				}
+			}
+		} else {
+			interaction.reply('That slot has already been played in! Choose a new one!')
+		}
+	}
+	if (interaction.customId === "row1-col3") {
+		if (s3 === "N") {
+			s3 = "X";
+			played = true;
+		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
+			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+			interaction.reply(board + '\nYou win!')
+		}
+			while (played) {
+				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
+				if (tictactoebot === 1 && s1 === "N") {
+					s1 = "O";
+					played = false;
+				} else if (tictactoebot === 2 && s2 === "N") {
+					played = false;
+					s2 = "O";
+				} else if (tictactoebot === 3 && s3 === "N") {
+					played = false;
+					s3 = "O";
+				} else if (tictactoebot === 4 && s4 === "N") {
+					played = false;
+					s4 = "O";
+				} else if (tictactoebot === 5 && s5 === "N") {
+					played = false;
+					s5 = "O";
+				} else if (tictactoebot === 6 && s6 === "N") {
+					played = false;
+					s6 = "O";
+				} else if (tictactoebot === 7 && s7 === "N") {
+					played = false;
+					s7 = "O";
+				} else if (tictactoebot === 8 && s8 === "N") {
+					played = false;
+					s8 = "O";
+				} else if (tictactoebot === 9 && s9 === "N") {
+					played = false;
+					s9 = "O";
+				}
+				
+				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + '\nThe bot beat you!')
+				} else if (played === false) {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+				}
+			}
+		} else {
+			interaction.reply('That slot has already been played in! Choose a new one!')
+		}
+	}
+	if (interaction.customId === "row2-col1") {
+		if (s4 === "N") {
+			s4 = "X";
+			played = true;
+		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
+			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+			interaction.reply(board + '\nYou win!')
+		}
+			while (played) {
+				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
+				if (tictactoebot === 1 && s1 === "N") {
+					s1 = "O";
+					played = false;
+				} else if (tictactoebot === 2 && s2 === "N") {
+					played = false;
+					s2 = "O";
+				} else if (tictactoebot === 3 && s3 === "N") {
+					played = false;
+					s3 = "O";
+				} else if (tictactoebot === 4 && s4 === "N") {
+					played = false;
+					s4 = "O";
+				} else if (tictactoebot === 5 && s5 === "N") {
+					played = false;
+					s5 = "O";
+				} else if (tictactoebot === 6 && s6 === "N") {
+					played = false;
+					s6 = "O";
+				} else if (tictactoebot === 7 && s7 === "N") {
+					played = false;
+					s7 = "O";
+				} else if (tictactoebot === 8 && s8 === "N") {
+					played = false;
+					s8 = "O";
+				} else if (tictactoebot === 9 && s9 === "N") {
+					played = false;
+					s9 = "O";
+				}
+				
+				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + '\nThe bot beat you!')
+				} else if (played === false) {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+				}
+			}
+		} else {
+			interaction.reply('That slot has already been played in! Choose a new one!')
+		}
+	}
+	if (interaction.customId === "row2-col2") {
+		if (s5 === "N") {
+			s5 = "X";
+			played = true;
+		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
+			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+			interaction.reply(board + '\nYou win!')
+		}
+			while (played) {
+				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
+				if (tictactoebot === 1 && s1 === "N") {
+					s1 = "O";
+					played = false;
+				} else if (tictactoebot === 2 && s2 === "N") {
+					played = false;
+					s2 = "O";
+				} else if (tictactoebot === 3 && s3 === "N") {
+					played = false;
+					s3 = "O";
+				} else if (tictactoebot === 4 && s4 === "N") {
+					played = false;
+					s4 = "O";
+				} else if (tictactoebot === 5 && s5 === "N") {
+					played = false;
+					s5 = "O";
+				} else if (tictactoebot === 6 && s6 === "N") {
+					played = false;
+					s6 = "O";
+				} else if (tictactoebot === 7 && s7 === "N") {
+					played = false;
+					s7 = "O";
+				} else if (tictactoebot === 8 && s8 === "N") {
+					played = false;
+					s8 = "O";
+				} else if (tictactoebot === 9 && s9 === "N") {
+					played = false;
+					s9 = "O";
+				}
+				
+				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + '\nThe bot beat you!')
+				} else if (played === false) {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+				}
+			}
+		} else {
+			interaction.reply('That slot has already been played in! Choose a new one!')
+		}
+	}
+	if (interaction.customId === "row2-col3") {
+		if (s6 === "N") {
+			s6 = "X";
+			played = true;
+		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
+			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+			interaction.reply(board + '\nYou win!')
+		}
+			while (played) {
+				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
+				if (tictactoebot === 1 && s1 === "N") {
+					s1 = "O";
+					played = false;
+				} else if (tictactoebot === 2 && s2 === "N") {
+					played = false;
+					s2 = "O";
+				} else if (tictactoebot === 3 && s3 === "N") {
+					played = false;
+					s3 = "O";
+				} else if (tictactoebot === 4 && s4 === "N") {
+					played = false;
+					s4 = "O";
+				} else if (tictactoebot === 5 && s5 === "N") {
+					played = false;
+					s5 = "O";
+				} else if (tictactoebot === 6 && s6 === "N") {
+					played = false;
+					s6 = "O";
+				} else if (tictactoebot === 7 && s7 === "N") {
+					played = false;
+					s7 = "O";
+				} else if (tictactoebot === 8 && s8 === "N") {
+					played = false;
+					s8 = "O";
+				} else if (tictactoebot === 9 && s9 === "N") {
+					played = false;
+					s9 = "O";
+				}
+				
+				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + '\nThe bot beat you!')
+				} else if (played === false) {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+				}
+			} 
+		} else {
+			interaction.reply('That slot has already been played in! Choose a new one!')
+		}
+	}
+	if (interaction.customId === "row3-col1") {
+		if (s7 === "N") {
+			s7 = "X";
+			played = true;
+		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
+			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+			interaction.reply(board + '\nYou win!')
+		}
+			while (played) {
+				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
+				if (tictactoebot === 1 && s1 === "N") {
+					s1 = "O";
+					played = false;
+				} else if (tictactoebot === 2 && s2 === "N") {
+					played = false;
+					s2 = "O";
+				} else if (tictactoebot === 3 && s3 === "N") {
+					played = false;
+					s3 = "O";
+				} else if (tictactoebot === 4 && s4 === "N") {
+					played = false;
+					s4 = "O";
+				} else if (tictactoebot === 5 && s5 === "N") {
+					played = false;
+					s5 = "O";
+				} else if (tictactoebot === 6 && s6 === "N") {
+					played = false;
+					s6 = "O";
+				} else if (tictactoebot === 7 && s7 === "N") {
+					played = false;
+					s7 = "O";
+				} else if (tictactoebot === 8 && s8 === "N") {
+					played = false;
+					s8 = "O";
+				} else if (tictactoebot === 9 && s9 === "N") {
+					played = false;
+					s9 = "O";
+				}
+				
+				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + '\nThe bot beat you!')
+				} else if (played === false) {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+				}
+			}
+		} else {
+			interaction.reply('That slot has already been played in! Choose a new one!')
+		}
+	}
+	if (interaction.customId === "row3-col2") {
+		if (s8 === "N") {
+			s8 = "X";
+			played = true;
+		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
+			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+			interaction.reply(board + '\nYou win!')
+		}
+			while (played) {
+				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
+				if (tictactoebot === 1 && s1 === "N") {
+					s1 = "O";
+					played = false;
+				} else if (tictactoebot === 2 && s2 === "N") {
+					played = false;
+					s2 = "O";
+				} else if (tictactoebot === 3 && s3 === "N") {
+					played = false;
+					s3 = "O";
+				} else if (tictactoebot === 4 && s4 === "N") {
+					played = false;
+					s4 = "O";
+				} else if (tictactoebot === 5 && s5 === "N") {
+					played = false;
+					s5 = "O";
+				} else if (tictactoebot === 6 && s6 === "N") {
+					played = false;
+					s6 = "O";
+				} else if (tictactoebot === 7 && s7 === "N") {
+					played = false;
+					s7 = "O";
+				} else if (tictactoebot === 8 && s8 === "N") {
+					played = false;
+					s8 = "O";
+				} else if (tictactoebot === 9 && s9 === "N") {
+					played = false;
+					s9 = "O";
+				}
+				
+				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + '\nThe bot beat you!')
+				} else if (played === false) {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+				}
+			}
+		} else {
+			interaction.reply('That slot has already been played in! Choose a new one!')
+		}
+	}
+	if (interaction.customId === "row3-col3") {
+		if (s9 === "N") {
+			s9 = "X";
+			played = true;
+		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
+			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+			interaction.reply(board + '\nYou win!')
+		}
+			while (played) {
+				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
+				if (tictactoebot === 1 && s1 === "N") {
+					s1 = "O";
+					played = false;
+				} else if (tictactoebot === 2 && s2 === "N") {
+					played = false;
+					s2 = "O";
+				} else if (tictactoebot === 3 && s3 === "N") {
+					played = false;
+					s3 = "O";
+				} else if (tictactoebot === 4 && s4 === "N") {
+					played = false;
+					s4 = "O";
+				} else if (tictactoebot === 5 && s5 === "N") {
+					played = false;
+					s5 = "O";
+				} else if (tictactoebot === 6 && s6 === "N") {
+					played = false;
+					s6 = "O";
+				} else if (tictactoebot === 7 && s7 === "N") {
+					played = false;
+					s7 = "O";
+				} else if (tictactoebot === 8 && s8 === "N") {
+					played = false;
+					s8 = "O";
+				} else if (tictactoebot === 9 && s9 === "N") {
+					played = false;
+					s9 = "O";
+				}
+				
+				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + '\nThe bot beat you!')
+				} else if (played === false) {
+					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
+					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+				}
+			}
+		} else {
+			interaction.reply('That slot has already been played in! Choose a new one!')
+		}
+	}
+	console.log('Tile 1 = ' + s1 + ' Tile 2 = ' + s2 + ' Tile 3 = ' + s3 + ' Tile 4 = ' + s4 + ' Tile 5 = ' + s5 + ' Tile 6 = ' + s6 + ' Tile 7 = ' + s7 + ' Tile 8 = ' + s8 + ' Tile 9 = ' + s9 + " Computer's Move " + tictactoebot)
+
+	
+	//Button Logic
+	if (interaction.customId === "primary") {
 		interaction.reply('You pressed me!');
     }
 
-	if (interaction.customId == "rock-button") {
+	//Rock Paper Scissors Logic
+	var selector = Math.floor( Math.random() * 3 ) + 1;
+	if (interaction.customId === "rock-button") {
 		if(selector === 1) {
 			interaction.reply('I chose rock too! Guess we tied.');
 		}
@@ -42,10 +523,8 @@ client.on(Events.InteractionCreate, async interaction => {
 		if (selector === 3) {
 			interaction.reply('I chose paper! You lose!');
 		}
-		
     }
-
-	if (interaction.customId == "paper-button") {
+	if (interaction.customId === "paper-button") {
 		if(selector === 1) {
 			interaction.reply('I chose paper too! Guess we tied.');
 		}
@@ -56,8 +535,7 @@ client.on(Events.InteractionCreate, async interaction => {
 			interaction.reply('I chose scissors! You lose!');
 		}
     }
-
-	if (interaction.customId == "scissors-button") {
+	if (interaction.customId === "scissors-button") {
 		if(selector === 1) {
 			interaction.reply('I chose scissors too! Guess we tied.');
 		}
@@ -71,6 +549,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	if (!interaction.isChatInputCommand()) return;
 
+	//Logic for other commands
 	const command = client.commands.get(interaction.commandName);
 	//console.log(client.commands.get(interaction.commandName));
 	if (!command) {
