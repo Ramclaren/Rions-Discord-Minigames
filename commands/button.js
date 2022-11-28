@@ -19,14 +19,5 @@ module.exports = {
     
             await interaction.reply({ content: 'I think you should,', components: [row] });
         }
-        /*
-        const filter = i => i.customId === 'primary' && i.user.id === '364389750578348033';
-        const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
-
-        collector.on('collect', async i => {
-	        await i.editReply({ content: 'A button was clicked!', components: [] });
-        });
-
-        collector.on('end', collected => console.log(`Collected ${collected.size} items`));*/
     },
 };
