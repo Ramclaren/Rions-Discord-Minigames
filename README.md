@@ -1,7 +1,7 @@
 # Rions-Discord-Minigames
 
 Installation:
-  Download Node.js and Discord.js or see https://discordjs.guide for extra help with installation
+ 	 Download Node.js and Discord.js or see https://discordjs.guide for extra help with installation
   
   Create a discord bot on the developer portal https://discord.com/developers/applications (Make sure to give admin permissions)
   
