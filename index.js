@@ -27,7 +27,7 @@ client.once(Events.ClientReady, () => {
 });
 
 
-
+//Variables for Tic Tac Toe
 var s1 =  "N";
 var s2 =  "N";
 var s3 =  "N";
@@ -503,10 +503,11 @@ client.on(Events.InteractionCreate, async interaction => {
 			interaction.reply('That slot has already been played in! Choose a new one!')
 		}
 	}
-	console.log('Tile 1 = ' + s1 + ' Tile 2 = ' + s2 + ' Tile 3 = ' + s3 + ' Tile 4 = ' + s4 + ' Tile 5 = ' + s5 + ' Tile 6 = ' + s6 + ' Tile 7 = ' + s7 + ' Tile 8 = ' + s8 + ' Tile 9 = ' + s9 + " Computer's Move " + tictactoebot)
+	//console.log('Tile 1 = ' + s1 + ' Tile 2 = ' + s2 + ' Tile 3 = ' + s3 + ' Tile 4 = ' + s4 + ' Tile 5 = ' + s5 + ' Tile 6 = ' + s6 + ' Tile 7 = ' + s7 + ' Tile 8 = ' + s8 + ' Tile 9 = ' + s9 + " Computer's Move " + tictactoebot)
 
 	
-	//Button Logic
+
+	//Button.js Logic
 	if (interaction.customId === "primary") {
 		interaction.reply('You pressed me!');
     }
@@ -549,9 +550,8 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	if (!interaction.isChatInputCommand()) return;
 
-	//Logic for other commands
+	//Logic to verify commands work
 	const command = client.commands.get(interaction.commandName);
-	//console.log(client.commands.get(interaction.commandName));
 	if (!command) {
 		console.error(`No command matching ${interaction.commandName} was found.`);
 		return;
@@ -567,82 +567,3 @@ client.on(Events.InteractionCreate, async interaction => {
 
 //Login to Discord with your client's token
 client.login(token);
-
-
-
-
-//const TicTacToe = require('discord-tictactoe');
-
-/*
-const fs = require('node:fs');
-const path = require('node:path');
-
-
-const { Client, GatewayIntentBits, SystemChannelFlagsBitField } = require('discord.js');
-const { token } = require('./config.json');
-
-
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
-
-client.commands = new Collection();
-
-const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-	const filePath = path.join(commandsPath, file);
-	const command = require(filePath);
-	// Set a new item in the Collection with the key as the command name and the value as the exported module
-	if ('data' in command && 'execute' in command) {
-		client.commands.set(command.data.name, command);
-	} else {
-		console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
-	}
-}
-
-client.on('interactionCreate', interaction => {
-	if (!interaction.isChatInputCommand()) return;
-	console.log(interaction);
-});
-
-	const command = interaction.client.commands.get(interaction.commandName);
-	if (!command) {
-		console.error(`No command matching ${interaction.commandName} was found.`);
-		return;
-	}
-
-	try {
-		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-	}
-*/
-	
-	
-/*
-// When the client is ready, run this code (only once)
-client.once('ready', () => {
-	console.log('Ready!');
-});
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isChatInputCommand()) return;
-
-	const { commandName } = interaction;
-		console.log('commandname:', commandName);
-	if (commandName === 'ping') {
-		await interaction.reply('Pong!');
-	} else if (commandName === 'server') {
-		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
-	} else if (commandName === 'user') {
-		await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
-	} else if (commandName === 'hello') {
-		await interaction.reply('World!');
-	} else if (commandName === 'roll-6') {
-		var diceRoll = Math.floor( Math.random() * 6 ) +1;
-		await interaction.reply(`You rolled a ` + diceRoll);
-	}
-});
-*/
-
