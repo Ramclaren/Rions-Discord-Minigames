@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 // Require the necessary discord.js classes, grabs the token from config
-const { Client, Collection, Events, GatewayIntentBits, TextInputStyle, ButtonBuilder } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, TextInputStyle, ButtonBuilderconst, EmbedBuilder, Message } = require('discord.js');
 const { token } = require('./config.json');
 
 // Creates a new instance of the client 
@@ -43,6 +43,7 @@ var tictactoebot = 1;
 
 //Why would I try coding tic tac toe without array
 client.on(Events.InteractionCreate, async interaction => {
+
 	//Tic Tac Toe Logic
 	if (interaction.customId === "row1-col1") {
 		if (s1 === "N") {
@@ -50,7 +51,26 @@ client.on(Events.InteractionCreate, async interaction => {
 			played = true;
 		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
 			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-			interaction.reply(board + '\nYou win!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+			interaction.update({content: board + '\nYou win!', embeds: [updateBoardEmbed]})
+played = false;
 		}
 			while (played) {
 				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
@@ -85,10 +105,47 @@ client.on(Events.InteractionCreate, async interaction => {
 				
 				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + '\nThe bot beat you!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					
+					interaction.update({content: board + '\nThe bot beat you!', embeds: [updateBoardEmbed]})
 				} else if (played === false) {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + '\nThe bot played in slot ' +tictactoebot+ '!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot played in slot ' +tictactoebot+ '!', embeds: [updateBoardEmbed]})
 				}
 			}
 		} else {
@@ -101,7 +158,26 @@ client.on(Events.InteractionCreate, async interaction => {
 			played = true;
 		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
 			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-			interaction.reply(board + '\nYou win!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+			interaction.update({content: board + '\nYou win!', embeds: [updateBoardEmbed]})
+played = false;
 		}
 			while (played) {
 				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
@@ -136,10 +212,46 @@ client.on(Events.InteractionCreate, async interaction => {
 				
 				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + '\nThe bot beat you!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot beat you!', embeds: [updateBoardEmbed]})
 				} else if (played === false) {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot played in slot ' +tictactoebot+ '!', embeds: [updateBoardEmbed]})
 				}
 			}
 		} else {
@@ -152,7 +264,26 @@ client.on(Events.InteractionCreate, async interaction => {
 			played = true;
 		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
 			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-			interaction.reply(board + '\nYou win!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+			interaction.update({content: board + '\nYou win!', embeds: [updateBoardEmbed]})
+played = false;
 		}
 			while (played) {
 				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
@@ -187,10 +318,46 @@ client.on(Events.InteractionCreate, async interaction => {
 				
 				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + '\nThe bot beat you!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot beat you!', embeds: [updateBoardEmbed]})
 				} else if (played === false) {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot played in slot ' +tictactoebot+ '!', embeds: [updateBoardEmbed]})
 				}
 			}
 		} else {
@@ -203,7 +370,26 @@ client.on(Events.InteractionCreate, async interaction => {
 			played = true;
 		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
 			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-			interaction.reply(board + '\nYou win!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+			interaction.update({content: board + '\nYou win!', embeds: [updateBoardEmbed]})
+played = false;
 		}
 			while (played) {
 				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
@@ -238,10 +424,46 @@ client.on(Events.InteractionCreate, async interaction => {
 				
 				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + '\nThe bot beat you!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot beat you!', embeds: [updateBoardEmbed]})
 				} else if (played === false) {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot played in slot ' +tictactoebot+ '!', embeds: [updateBoardEmbed]})
 				}
 			}
 		} else {
@@ -254,7 +476,26 @@ client.on(Events.InteractionCreate, async interaction => {
 			played = true;
 		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
 			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-			interaction.reply(board + '\nYou win!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+			interaction.update({content: board + '\nYou win!', embeds: [updateBoardEmbed]})
+played = false;
 		}
 			while (played) {
 				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
@@ -289,10 +530,46 @@ client.on(Events.InteractionCreate, async interaction => {
 				
 				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + '\nThe bot beat you!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot beat you!', embeds: [updateBoardEmbed]})
 				} else if (played === false) {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot played in slot ' +tictactoebot+ '!', embeds: [updateBoardEmbed]})
 				}
 			}
 		} else {
@@ -305,7 +582,26 @@ client.on(Events.InteractionCreate, async interaction => {
 			played = true;
 		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
 			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-			interaction.reply(board + '\nYou win!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+			interaction.update({content: board + '\nYou win!', embeds: [updateBoardEmbed]})
+played = false;
 		}
 			while (played) {
 				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
@@ -340,10 +636,46 @@ client.on(Events.InteractionCreate, async interaction => {
 				
 				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + '\nThe bot beat you!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot beat you!', embeds: [updateBoardEmbed]})
 				} else if (played === false) {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot played in slot ' +tictactoebot+ '!', embeds: [updateBoardEmbed]})
 				}
 			} 
 		} else {
@@ -356,7 +688,26 @@ client.on(Events.InteractionCreate, async interaction => {
 			played = true;
 		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
 			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-			interaction.reply(board + '\nYou win!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+			interaction.update({content: board + '\nYou win!', embeds: [updateBoardEmbed]})
+played = false;
 		}
 			while (played) {
 				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
@@ -391,10 +742,46 @@ client.on(Events.InteractionCreate, async interaction => {
 				
 				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + '\nThe bot beat you!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot beat you!', embeds: [updateBoardEmbed]})
 				} else if (played === false) {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot played in slot ' +tictactoebot+ '!', embeds: [updateBoardEmbed]})
 				}
 			}
 		} else {
@@ -407,7 +794,26 @@ client.on(Events.InteractionCreate, async interaction => {
 			played = true;
 		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
 			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-			interaction.reply(board + '\nYou win!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+			interaction.update({content: board + '\nYou win!', embeds: [updateBoardEmbed]})
+played = false;
 		}
 			while (played) {
 				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
@@ -442,10 +848,46 @@ client.on(Events.InteractionCreate, async interaction => {
 				
 				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + '\nThe bot beat you!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot beat you!', embeds: [updateBoardEmbed]})
 				} else if (played === false) {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot played in slot ' +tictactoebot+ '!', embeds: [updateBoardEmbed]})
 				}
 			}
 		} else {
@@ -458,7 +900,26 @@ client.on(Events.InteractionCreate, async interaction => {
 			played = true;
 		if (s1 === s2 && s2 === s3 && s1 === "X" || s4 === s5 && s5 === s6 && s4 === "X" || s7 === s8 && s8 === s9 && s7 === "X" || s1 === s4 && s4 === s7 && s1 === "X" || s2 === s5 && s5 === s8 && s2 === "X" || s3 === s6 && s6 === s9  && s3 === "X" || s1 === s5 && s5 === s9 && s1 === "X" || s3 === s5 && s5 === s7 && s3 === "X") {
 			board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-			interaction.reply(board + '\nYou win!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+			interaction.update({content: board + '\nYou win!', embeds: [updateBoardEmbed]})
+played = false;
 		}
 			while (played) {
 				tictactoebot = Math.floor( Math.random() * 9 ) + 1;
@@ -493,19 +954,82 @@ client.on(Events.InteractionCreate, async interaction => {
 				
 				if (s1 === s2 && s2 === s3 && s1 === "O" || s4 === s5 && s5 === s6 && s4 === "O" || s7 === s8 && s8 === s9 && s7 === "O" || s1 === s4 && s4 === s7 && s1 === "O" || s2 === s5 && s5 === s8 && s2 === "O" || s3 === s6 && s6 === s9 && s3 === "O" || s1 === s5 && s5 === s9 && s1 === "O" || s3 === s5 && s5 === s7 && s3 === "O") {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + '\nThe bot beat you!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot beat you!', embeds: [updateBoardEmbed]})
 				} else if (played === false) {
 					board = "|" + s1 + "|" + s2 + "|" + s3 + "| \n" + "|" + s4 + "|" + s5 + "|" + s6 + "| \n" + "|" + s7 + "|" + s8 + "|" + s9 + "|"
-					interaction.reply(board + ' \nThe bot played in slot ' +tictactoebot+ '!')
+					const updateBoardEmbed = new EmbedBuilder()
+						.setTitle('Tic Tac Toe Board')
+						.setDescription('This is the board for the current game')
+						.addFields(
+							{ name: s1, value: 'Slot 1', inline: true },
+							{ name: s2, value: 'Slot 2', inline: true },
+							{ name: s3, value: 'Slot 3', inline: true },
+						)
+						.addFields(
+							{ name: s4, value: 'Slot 4', inline: true },
+							{ name: s5, value: 'Slot 5', inline: true },
+							{ name: s6, value: 'Slot 6', inline: true },
+						)
+						.addFields(
+							{ name: s7, value: 'Slot 7', inline: true },
+							{ name: s8, value: 'Slot 8', inline: true },
+							{ name: s9, value: 'Slot 9', inline: true },
+						)
+					interaction.update({content: board + '\nThe bot played in slot ' +tictactoebot+ '!', embeds: [updateBoardEmbed]})
 				}
 			}
 		} else {
 			interaction.reply('That slot has already been played in! Choose a new one!')
 		}
 	}
-	//console.log('Tile 1 = ' + s1 + ' Tile 2 = ' + s2 + ' Tile 3 = ' + s3 + ' Tile 4 = ' + s4 + ' Tile 5 = ' + s5 + ' Tile 6 = ' + s6 + ' Tile 7 = ' + s7 + ' Tile 8 = ' + s8 + ' Tile 9 = ' + s9 + " Computer's Move " + tictactoebot)
+	//945 lines of code for tic tac toe...
 
-	
+	//Update Embed Button in bot-info Logic
+	// if (interaction.customId === "embedChanger") {
+	// 	console.log("Updating Embed")
+		
+	// 	const updateBoardEmbed = new EmbedBuilder()
+	// 		.setTitle('Tic Tac Toe Board')
+	// 		.setDescription('This is the board for the current game')
+	// 		.addFields(
+    //             { name: s1, value: 'Slot 1', inline: true },
+    //             { name: s2, value: 'Slot 2', inline: true },
+    //             { name: s3, value: 'Slot 3', inline: true },
+	// 		)
+	// 		.addFields(
+	// 			{ name: s4, value: 'Slot 4', inline: true },
+    //             { name: s5, value: 'Slot 5', inline: true },
+    //             { name: s6, value: 'Slot 6', inline: true },
+	// 		)
+	// 		.addFields(
+	// 			{ name: s7, value: 'Slot 7', inline: true },
+    //             { name: s8, value: 'Slot 8', inline: true },
+    //             { name: s9, value: 'Slot 9', inline: true },
+	// 		)
+		
+	// 	const newBoardEmbed = EmbedBuilder.from(updateBoardEmbed)
+	// //Externally store board data, update when button is pressed
+	// 	interaction.update({ embeds: [newBoardEmbed]})
+    // }
+
 
 	//Button.js Logic
 	if (interaction.customId === "primary") {
