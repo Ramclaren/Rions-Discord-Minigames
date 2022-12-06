@@ -33,7 +33,15 @@ module.exports = {
             //.setImage('https://i.imgur.com/gJ7PN5i.png')
             .setTimestamp()
             .setFooter({ text: 'Made by Rion-Mark McLaren Jr.', iconURL: 'https://i.imgur.com/gJ7PN5i.png' });
-            await interaction.reply({ embeds: [infoEmbed] });
+
+            const row = new ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId('embedChanger')
+                        .setLabel('Click me to update the embed')
+                        .setStyle(ButtonStyle.Primary),
+                );
+            await interaction.reply({ embeds: [infoEmbed], components: [row] });
         }
     }
 }

@@ -66,7 +66,26 @@ module.exports = {
 						//.setEmoji(':scissors:')
 				);
                 
-			await interaction.reply({ content: 'Click a box to mark it!', components: [row1,row2,row3]})
+			const boardEmbed = new EmbedBuilder()
+				.setTitle('Tic Tac Toe Board')
+				.setDescription('This is the board for the current game')
+				.addFields(
+					{ name: 'N', value: 'Slot 1', inline: true },
+					{ name: 'N', value: 'Slot 2', inline: true },
+					{ name: 'N', value: 'Slot 3', inline: true },
+				)
+				.addFields(
+					{ name: 'N', value: 'Slot 4', inline: true },
+					{ name: 'N', value: 'Slot 5', inline: true },
+					{ name: 'N', value: 'Slot 6', inline: true },
+				)
+				.addFields(
+					{ name: 'N', value: 'Slot 7', inline: true },
+					{ name: 'N', value: 'Slot 8', inline: true },
+					{ name: 'N', value: 'Slot 9', inline: true },
+				)
+
+			await interaction.reply({ content: 'Click a box to mark it!', embeds:[boardEmbed], components: [row1,row2,row3]})
 		}
     }
 }
